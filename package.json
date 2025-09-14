@@ -1,0 +1,62 @@
+{
+	"name": "brimstone",
+	"version": "0.0.0",
+	"main": "./out/main/index.js",
+	"scripts": {
+		"lint": "biome lint .",
+		"lint:fix": "biome lint --write .",
+		"format": "biome format --write .",
+		"format:check": "biome format .",
+		"check": "biome check .",
+		"check:fix": "biome check --write .",
+		"prepare": "husky",
+		"typecheck": "tsc --noEmit -p tsconfig.json --composite false",
+		"start": "electron-vite preview",
+		"dev": "electron-vite dev --watch",
+		"build": "npm run typecheck && electron-vite build",
+		"postinstall": "electron-builder install-app-deps",
+		"build:unpack": "npm run build && electron-builder --dir",
+		"build:win": "npm run build && electron-builder --win",
+		"build:mac": "electron-vite build && electron-builder --mac",
+		"build:linux": "electron-vite build && electron-builder --linux"
+	},
+	"lint-staged": {
+		"*.{js,ts,json}": [
+			"biome check --write --no-errors-on-unmatched"
+		]
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged",
+			"commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+		}
+	},
+	"engines": {
+		"node": ">=22"
+	},
+	"packageManager": "npm@11.5.2",
+	"dependencies": {
+		"@electron-toolkit/preload": "^3.0.2",
+		"@electron-toolkit/utils": "^4.0.0",
+		"electron-updater": "^6.6.2"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.2.2",
+		"@commitlint/cli": "^19.8.1",
+		"@commitlint/config-conventional": "^19.8.1",
+		"@electron-toolkit/tsconfig": "^1.0.1",
+		"@types/node": "^24.3.0",
+		"@types/react": "^19.1.11",
+		"@types/react-dom": "^19.1.7",
+		"@vitejs/plugin-react": "^5.0.1",
+		"electron": "^37.3.1",
+		"electron-builder": "^26.0.12",
+		"electron-vite": "^4.0.0",
+		"husky": "^9.1.7",
+		"lint-staged": "^16.1.5",
+		"react": "^19.1.1",
+		"react-dom": "^19.1.1",
+		"typescript": "^5.9.2",
+		"vite": "^7.1.3"
+	}
+}
