@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="logo.svg" alt="Brimstone Logo">
+  <img src="logo.svg" alt="Torrentus Logo">
 </p>
 
-# Brimstone ⚡
+# Torrentus ⚡
 
 ![Electron](https://img.shields.io/badge/Electron-Latest-47848F?logo=electron&logoColor=white)
 ![React](https://img.shields.io/badge/React-19%2B-61DAFB?logo=react&logoColor=white)
@@ -10,18 +10,19 @@
 ![Vite](https://img.shields.io/badge/Vite-6%2B-646CFF?logo=vite&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-yellow?logo=open-source-initiative&logoColor=white)
 
-**Brimstone** is a modern Electron application template with React and TypeScript. Built with
-performance and developer experience in mind, it provides a solid foundation for creating
-cross-platform desktop applications with web technologies.
+**Torrentus** is a modern, cross-platform torrent client built with Electron, React, and TypeScript.
+Experience fast, reliable torrent downloading with a beautiful and intuitive user interface.
 
 ---
 
 ## Features 🌟
 
-- **Electron Framework**: Build cross-platform desktop apps with JavaScript, HTML, and CSS
-- **React + TypeScript**: Modern frontend development with type safety
-- **Vite-powered**: Enjoy lightning-fast HMR during development
-- **Cross-platform Building**: Easily package for Windows, macOS, and Linux
+- **Modern Torrent Client**: Download and manage torrent files with ease
+- **Cross-platform**: Works seamlessly on Windows, macOS, and Linux
+- **Built with Modern Tech**:
+  - **Electron Framework**: Native desktop experience
+  - **React + TypeScript**: Responsive UI with type safety
+  - **Vite-powered**: Lightning-fast development and optimized builds
 - **Developer Experience**:
   - **BiomeJS**: Enforces consistent code quality.
   - **Hot Reloading**: See changes instantly during development
@@ -45,8 +46,8 @@ Ensure you have the following installed:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/tejastn10/brimstone.git
-   cd brimstone
+   git clone https://github.com/tejastn10/torrentus.git
+   cd torrentus
    ```
 
 2. Install dependencies:
@@ -55,13 +56,13 @@ Ensure you have the following installed:
    npm install
    ```
 
-3. Start the development server:
+3. Start the application in development mode:
 
    ```bash
    npm run dev
    ```
 
-4. Your Electron app should launch automatically in development mode.
+4. The Torrentus app will launch automatically.
 
 ---
 
@@ -104,7 +105,7 @@ For the best development experience, we recommend:
 
 ## Building for Production 🏗️
 
-Brimstone comes with pre-configured build scripts for all major platforms:
+Torrentus comes with pre-configured build scripts for all major platforms:
 
 ### Windows
 
@@ -137,7 +138,7 @@ Build outputs will be available in the `dist` directory.
 ## Project Structure 📁
 
 ```bash
-brimstone/
+torrentus/
 ├── .husky/                     # Git hooks configuration
 │   ├── _/                      # Husky internals
 │   ├── commit-msg              # Commit message validation hook
@@ -176,12 +177,11 @@ brimstone/
 To customize your application details, modify the following files:
 
 - `package.json`: Update name, description, version, and author
-- `electron-builder.json`: Configure build options for different platforms
+- `electron-builder.yml`: Configure build options for different platforms
 
 ### Styling and Theming
 
-The project includes minimal styling to get you started. Feel free to integrate your preferred
-styling solution:
+The project uses modern React practices for styling. You can integrate your preferred styling solution:
 
 - CSS/SCSS Modules
 - Styled Components
@@ -200,5 +200,5 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE.md) fi
 
 - Built with **Electron** for cross-platform desktop applications
 - Powered by **Vite** for lightning-fast development
-- Strengthened with **TypeScript** for robust applications
-- Made with ❤️ for developers who want to build desktop apps with web technologies
+- Strengthened with **TypeScript** for type-safe development
+- Made with ❤️ for efficient torrent downloading
