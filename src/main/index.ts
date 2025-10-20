@@ -2,16 +2,26 @@ import { join } from "node:path";
 import { electronApp, is, optimizer } from "@electron-toolkit/utils";
 import { app, BrowserWindow, ipcMain, shell } from "electron";
 
-function createWindow(): void {
+const getIconPath = (): string => {
+	const path = join(__dirname, "../../resources/icon.png");
+	return path;
+};
+
+const createWindow = (): BrowserWindow => {
 	// Create the browser window.
 	const mainWindow = new BrowserWindow({
-		width: 900,
-		height: 670,
+		width: 1400,
+		height: 900,
 		show: false,
+		icon: getIconPath(),
 		autoHideMenuBar: true,
+		frame: false,
+		titleBarStyle: process.platform === "darwin" ? "hiddenInset" : "hidden",
 		webPreferences: {
 			preload: join(__dirname, "../preload/index.js"),
 			sandbox: false,
+			nodeIntegration: false,
+			contextIsolation: true,
 		},
 	});
 
@@ -31,7 +41,39 @@ function createWindow(): void {
 	} else {
 		mainWindow.loadFile(join(__dirname, "../renderer/index.html"));
 	}
-}
+
+	return mainWindow;
+};
+
+// ? Handlers
+
+// * Window handlers
+ipcMain.handle("minimize-window", () => {
+	const mainWindow = BrowserWindow.getAllWindows()[0];
+
+	if (mainWindow) {
+		mainWindow.minimize();
+	}
+});
+
+ipcMain.handle("maximize-window", () => {
+	const mainWindow = BrowserWindow.getAllWindows()[0];
+	if (mainWindow) {
+		if (mainWindow.isMaximized()) {
+			mainWindow.unmaximize();
+		} else {
+			mainWindow.maximize();
+		}
+	}
+});
+
+ipcMain.handle("close-window", () => {
+	const mainWindow = BrowserWindow.getAllWindows()[0];
+
+	if (mainWindow) {
+		mainWindow.close();
+	}
+});
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -40,6 +82,11 @@ app.whenReady().then(() => {
 	// Set app user model id for windows
 	electronApp.setAppUserModelId("com.electron");
 
+	// Set Dock icon for macOS
+	if (process.platform === "darwin") {
+		app.dock?.setIcon(getIconPath());
+	}
+
 	// Default open or close DevTools by F12 in development
 	// and ignore CommandOrControl + R in production.
 	// see https://github.com/alex8088/electron-toolkit/tree/master/packages/utils
@@ -47,15 +94,14 @@ app.whenReady().then(() => {
 		optimizer.watchWindowShortcuts(window);
 	});
 
-	// IPC test
-	ipcMain.on("ping", () => console.log("pong"));
-
 	createWindow();
 
 	app.on("activate", () => {
 		// On macOS it's common to re-create a window in the app when the
 		// dock icon is clicked and there are no other windows open.
-		if (BrowserWindow.getAllWindows().length === 0) createWindow();
+		if (BrowserWindow.getAllWindows().length === 0) {
+			createWindow();
+		}
 	});
 });
 
